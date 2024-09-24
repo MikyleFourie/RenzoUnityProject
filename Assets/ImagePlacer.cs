@@ -12,6 +12,7 @@ public class ImagePlacer : MonoBehaviour
     public float maxHeight = 4.0f; // Maximum height the images can be placed at
 
     private List<Vector3> placedPositions = new List<Vector3>();
+    public int numberOfPictures = 0;
 
     void Start()
     {
@@ -44,6 +45,7 @@ public class ImagePlacer : MonoBehaviour
 
             // Instantiate the image prefab at the chosen position
             GameObject imageInstance = Instantiate(imagePrefab, randomPosition, Quaternion.Euler(0, randomYRotation, 0));
+            numberOfPictures++;
             placedPositions.Add(randomPosition);
         }
     }
