@@ -9,7 +9,7 @@ public class ImageInteraction : MonoBehaviour
     public GameObject descriptionPanel; // Reference to the description UI panel
     public GameObject aimPanel;
     public FirstPersonController firstPersonController;
-
+    //public GameObject refOrb;
 
     void Start()
     {
@@ -32,13 +32,17 @@ public class ImageInteraction : MonoBehaviour
             // Visualize the raycast in the Scene view
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * interactionDistance, Color.red, 5f);
 
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, interactionDistance, imageLayer))
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit /*, interactionDistance, imageLayer */))
             {
+                //Debug.Log("Ray hit point: " + hit.point);
+                //refOrb.transform.position = hit.point;
+
+
                 // Check if the clicked object is an image
                 if (hit.transform.CompareTag("Image"))
                 {
                     //Debug line
-                    Debug.Log("Hit this object: " + hit.transform.parent.name);
+                    //Debug.Log("Hit this object: " + hit.transform.parent.name);
 
                     // Call a method to handle the interaction
                     ShowImageDescription(hit.transform.gameObject);
