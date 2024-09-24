@@ -10,6 +10,10 @@ public class FirstPersonController : MonoBehaviour
     private float xRotation = 0f;
     private CharacterController controller;
 
+    float ySpeed;
+    float gravity = 0.1f;
+
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -34,11 +38,15 @@ public class FirstPersonController : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
 
-        // Translate input into world space
-        Vector3 move = transform.right * moveX + transform.forward * moveZ;
+        //// Translate input into world space
+        Vector3 move = transform.right * moveX * speed + transform.forward * moveZ * speed;
+
+        //gravity
+        ySpeed -= gravity * Time.deltaTime;
+        move.y = ySpeed;
 
         // Move the character
-        controller.Move(move * speed * Time.deltaTime);
+        controller.Move(move * Time.deltaTime);
     }
 }
 
