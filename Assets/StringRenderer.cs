@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class StringRenderer : MonoBehaviour
 {
-    public float stringLength = 80.0f; // Length of the string
+    public float stringLength = 50.0f; // Length of the string
 
     private LineRenderer lineRenderer;
 

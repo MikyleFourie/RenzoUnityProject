@@ -39,8 +39,11 @@ public class ImagePlacer : MonoBehaviour
             }
             while (!IsPositionValid(randomPosition));
 
+            // Generate a random Y rotation
+            float randomYRotation = Random.Range(0f, 360f); // Random rotation between 0 and 360 degrees
+
             // Instantiate the image prefab at the chosen position
-            GameObject imageInstance = Instantiate(imagePrefab, randomPosition, Quaternion.identity);
+            GameObject imageInstance = Instantiate(imagePrefab, randomPosition, Quaternion.Euler(0, randomYRotation, 0));
             placedPositions.Add(randomPosition);
         }
     }
