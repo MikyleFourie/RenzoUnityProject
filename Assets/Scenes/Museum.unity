@@ -7546,10 +7546,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -15600,13 +15600,13 @@ MonoBehaviour:
     nec quam ac risus ultricies rutrum eu at metus. Fusce in condimentum eros, quis
     sodales elit. Praesent aliquam mi eu pellentesque convallis.
 
-    
 
-    Aliquam
-    erat volutpat. Donec iaculis lectus non luctus ultricies. Mauris cursus enim
-    ut enim pulvinar vehicula. Interdum et malesuada fames ac ante ipsum primis in
-    faucibus. Donec vestibulum, erat id dictum tristique, metus tortor feugiat tortor,
-    non facilisis felis neque in tortor. Pellentesque eleifend libero vehicula, vehicula
+
+    Aliquam erat
+    volutpat. Donec iaculis lectus non luctus ultricies. Mauris cursus enim ut enim
+    pulvinar vehicula. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+    Donec vestibulum, erat id dictum tristique, metus tortor feugiat tortor, non
+    facilisis felis neque in tortor. Pellentesque eleifend libero vehicula, vehicula
     lectus a, molestie metus. Curabitur lobortis tortor non orci lobortis, quis elementum
     mi tincidunt. Nulla gravida orci quis felis pulvinar congue. Nunc tristique mauris
     quis lacus facilisis dapibus at vitae velit. Mauris suscipit neque eu tincidunt
@@ -15616,7 +15616,7 @@ MonoBehaviour:
     litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum a nulla
     ac nunc ultricies tincidunt.
 
-    
+
 
     Nunc tristique luctus nisl sed tristique.
     Morbi laoreet at velit ac interdum. Phasellus vehicula turpis lectus, eget lobortis
@@ -15624,7 +15624,7 @@ MonoBehaviour:
     felis urna, non sollicitudin sem tincidunt in. Nam felis ligula, lobortis et
     molestie lacinia, vulputate ac lectus. Phasellus convallis eu metus sed consequat.
 
-    
+
 
     Fusce
     facilisis imperdiet turpis, non semper orci vestibulum in. In rhoncus, urna at
@@ -15635,12 +15635,12 @@ MonoBehaviour:
     elit. Sed feugiat nisl vel nibh dictum, eu pharetra metus aliquam. Morbi fermentum
     scelerisque dolor vel blandit.
 
-    
 
-    Proin at condimentum tellus. Donec
-    molestie tincidunt leo ac convallis. Nulla quis condimentum ex. Integer dignissim
-    velit sed diam vulputate, sed hendrerit magna congue. Vestibulum finibus, dolor
-    ut congue scelerisque, tellus lorem laoreet ante, in placerat magna massa vitae
+
+    Proin at condimentum tellus. Donec molestie
+    tincidunt leo ac convallis. Nulla quis condimentum ex. Integer dignissim velit
+    sed diam vulputate, sed hendrerit magna congue. Vestibulum finibus, dolor ut
+    congue scelerisque, tellus lorem laoreet ante, in placerat magna massa vitae
     metus. In eros leo, sollicitudin sed porta vel, fringilla nec diam. Duis eu velit
     urna. Aenean in luctus mi. Ut at enim at orci ornare volutpat. Nullam quis ante
     ullamcorper, semper ex sed, semper ante. Nulla maximus dignissim quam, ullamcorper
@@ -15673,7 +15673,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21.55
+  m_fontSize: 19.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
