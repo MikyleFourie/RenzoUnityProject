@@ -8,7 +8,9 @@ public class ImageSelector : MonoBehaviour
     //private ImageArray ImageArrayScript;
     //private GameObject ScriptHolder;
 
-    public RawImage[] rawImages;
+    public static RawImage[] rawImages;
+
+    public RawImage blankImage;
 
 
 
@@ -25,17 +27,41 @@ public class ImageSelector : MonoBehaviour
         }
          */
 
-        int RandomNum = Random.Range(0,rawImages.Length);
-
-        rawImages[RandomNum].gameObject.SetActive(true);
 
 
+
+        if(rawImages.Length > 0)
+        {
+            int RandomNum = Random.Range(0, rawImages.Length);
+
+            rawImages[RandomNum].gameObject.SetActive(true);
+            RemoveAt(ref rawImages, RandomNum);
+        }
+        else
+        {
+            blankImage.gameObject.SetActive(true);
+        }
         
+
+
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public static void RemoveAt<T>(ref T[] arr, int index)
+    {
+        for (int a = index; a < arr.Length - 1; a++)
+        {
+            // moving elements downwards, to fill the gap at [index]
+            arr[a] = arr[a + 1];
+        }
+        // finally, let's decrement Array's size by one
+        System.Array.Resize(ref arr, arr.Length - 1);
     }
 }

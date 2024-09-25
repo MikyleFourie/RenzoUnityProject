@@ -14,9 +14,12 @@ public class ImagePlacer : MonoBehaviour
     private List<Vector3> placedPositions = new List<Vector3>();
     public int numberOfPictures = 0;
 
+    public PhotoViewer photoViewer;
+
     void Start()
     {
         PlaceImages();
+        photoViewer.LoadImagesAfterStart();
     }
 
     void PlaceImages()
