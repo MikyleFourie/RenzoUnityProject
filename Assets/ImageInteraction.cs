@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class ImageInteraction : MonoBehaviour
 {
@@ -11,6 +14,9 @@ public class ImageInteraction : MonoBehaviour
     public FirstPersonController firstPersonController;
     //public GameObject refOrb;
 
+    // Reference to the high-res image display in the description panel
+    public Image highResImageDisplay; // UI Image component for displaying high-res images
+    public TMPro.TMP_Text descriptionText; // Text component for displaying description
     void Start()
     {
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * interactionDistance, Color.red, 5f);
@@ -58,9 +64,36 @@ public class ImageInteraction : MonoBehaviour
         firstPersonController.enabled = false;
         aimPanel.SetActive(false);
         descriptionPanel.SetActive(true);
-        // Move the image close to the player and show the description
-        // Assume image has a method or data to get its description
-        // Display the description UI panel with the relevant text
+
+        // Get the name of the low-res image from the clicked GameObject
+        string lowResImageName = image.name; // Make sure your GameObject's name is the same as the image file name
+
+        // Construct the path to the corresponding high-res image
+        string highResImagePath = Path.Combine(
+            @"C:\Users\mikyl\OneDrive\Desktop\ImagesHigh", // Adjust the path as necessary
+            lowResImageName
+        );
+
+        // Load the high-res image
+        LoadHighResImage(highResImagePath);
     }
+
+    void LoadHighResImage(string path)
+    {
+        // Assuming you have a way to display the image in the UI
+        Texture2D highResTexture = new Texture2D(2, 2); // Create a temporary texture
+        byte[] imageData = File.ReadAllBytes(path); // Read the high-res image file
+        highResTexture.LoadImage(imageData); // Load the image data into the texture
+
+        // Assume you have a reference to an Image component in your description panel
+        //Image imageComponent = descriptionPanel.GetComponentInChildren<Image>();
+        //imageComponent.sprite = Sprite.Create(highResTexture, new Rect(0, 0, highResTexture.width, highResTexture.height), new Vector2(0.5f, 0.5f));
+        highResImageDisplay.sprite = Sprite.Create(highResTexture, new Rect(0, 0, highResTexture.width, highResTexture.height), new Vector2(0.5f, 0.5f));
+
+        // Optionally, display the description text as well
+        // Assume you have a way to set the description text
+        // descriptionText.text = GetImageDescription(lowResImageName); // Add a method to fetch description
+    }
+
 }
 

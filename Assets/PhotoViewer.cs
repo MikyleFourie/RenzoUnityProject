@@ -27,19 +27,7 @@ public class PhotoViewer : MonoBehaviour
 
     public void LoadImagesAfterStart(string folderPath)
     {
-        //---------------OLD CODE
-        //Change this to change pictures folder
-        //string path = @"C:\Users\jeanf\Downloads\Images\";
-
-        //pathPreFix = @"file://";
-
-        //files = System.IO.Directory.GetFiles(path, "*.png");
-
         imageObjs = GameObject.FindGameObjectsWithTag("Image");
-
-        //StartCoroutine(LoadImages());
-        //-------------------------
-
 
         if (!Directory.Exists(folderPath))
         {
@@ -67,28 +55,6 @@ public class PhotoViewer : MonoBehaviour
 
     private IEnumerator LoadImages(string[] filePaths)
     {
-        //-------------------OLD CODE
-        //load all images in default folder as textures and apply dynamically to plane game objects.
-        //6 pictures per page
-        //textures = new Texture2D[files.Length];
-
-        //int dummy = 0;
-        //foreach (string tstring in files)
-        //{
-
-        //    string pathTemp = pathPreFix + tstring;
-        //    WWW www = new WWW(pathTemp);
-        //    yield return www;
-        //    Texture2D texTmp = new Texture2D(1024, 1024, TextureFormat.DXT1, false);
-        //    www.LoadImageIntoTexture(texTmp);
-
-        //    textures[dummy] = texTmp;
-
-
-        //    imageObjs[dummy].GetComponent<Renderer>().material.SetTexture("_MainTex", texTmp);
-        //    dummy++;
-        //}
-        //---------------------------
 
         for (int i = 0; i < filePaths.Length && i < imageObjs.Length; i++)
         {
@@ -108,6 +74,9 @@ public class PhotoViewer : MonoBehaviour
 
                     // Apply the texture to the respective GameObject's material
                     imageObjs[i].GetComponent<Renderer>().material.mainTexture = texture;
+
+                    // Set the name of the GameObject to the filename of the loaded image
+                    imageObjs[i].name = Path.GetFileName(filePaths[i]);  // Set the name to the filename (e.g., OriginsCentreEntrance.JPG)
 
                     // Get the aspect ratio of the image
                     float imageAspectRatio = (float)texture.width / texture.height;
