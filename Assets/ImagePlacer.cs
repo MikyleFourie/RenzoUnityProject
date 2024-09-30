@@ -19,7 +19,7 @@ public class ImagePlacer : MonoBehaviour
     void Start()
     {
         PlaceImages();
-        photoViewer.LoadImagesAfterStart();
+        photoViewer.LoadImagesAfterStart("C:\\Users\\mikyl\\OneDrive\\Desktop\\Images");
     }
 
     void PlaceImages()
