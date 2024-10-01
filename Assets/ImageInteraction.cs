@@ -23,7 +23,7 @@ public class ImageInteraction : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1))
         {
             descriptionPanel.SetActive(false);
             aimPanel.SetActive(true);

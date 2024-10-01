@@ -41,6 +41,26 @@ public class FirstPersonController : MonoBehaviour
         //// Translate input into world space
         Vector3 move = transform.right * moveX * speed + transform.forward * moveZ * speed;
 
+        // Check for right mouse button click
+        if (Input.GetMouseButton(1)) // 1 is the right mouse button
+        {
+            // Move forward
+            move = transform.forward * speed;
+
+            //gravity
+            ySpeed -= gravity * Time.deltaTime;
+            move.y = ySpeed;
+
+            // Move the character
+            controller.Move(move * Time.deltaTime);
+        }
+        else
+        {
+            // Reset vertical speed when not moving
+            ySpeed = 0;
+        }
+
+
         //gravity
         ySpeed -= gravity * Time.deltaTime;
         move.y = ySpeed;
