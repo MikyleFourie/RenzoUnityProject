@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class ImagePlacer : MonoBehaviour
 {
     public GameObject imagePrefab;  // Prefab representing the image (or an empty GameObject with Image attached)
-    public int imageCount = 7;   // Number of images to place (should be 2000)
+    public int imageCount = 723;   // Number of images to place (should be 2000)
     public Vector2 roomSize = new Vector2(30, 30);  // Room dimensions (Width x Length) (should be 100x100 for full room)
     public float minSpacing = 2.0f; // Minimum spacing between images
     public float minHeight = 1.0f;  // Minimum height off the floor
@@ -19,7 +20,10 @@ public class ImagePlacer : MonoBehaviour
     void Start()
     {
         PlaceImages();
-        photoViewer.LoadImagesAfterStart("C:\\Users\\mikyl\\OneDrive\\Desktop\\ImagesLow");
+        PlaceImages();
+        //photoViewer.LoadImagesAfterStart("C:\\Users\\mikyl\\OneDrive\\Desktop\\ImagesLow");
+        photoViewer.LoadImagesAfterStart(Path.Combine(Application.dataPath, "Images", "ImagesLow"));
+
     }
 
     void PlaceImages()
