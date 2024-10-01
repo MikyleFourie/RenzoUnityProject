@@ -59,6 +59,28 @@ public class ImageInteraction : MonoBehaviour
 
     }
 
+    //void ShowImageDescription(GameObject image)
+    //{
+    //    firstPersonController.enabled = false;
+    //    aimPanel.SetActive(false);
+    //    descriptionPanel.SetActive(true);
+
+    //    // Get the name of the low-res image from the clicked GameObject
+    //    string lowResImageName = image.name; // Make sure your GameObject's name is the same as the image file name
+
+    //    // Construct the path to the corresponding high-res image
+
+    //    string highResImagePath = Path.Combine(
+    //    Application.dataPath, // Path to the Assets folder
+    //    "Images",            // The folder within Assets
+    //    "ImagesHigh",       // The subfolder for high-resolution images
+    //    lowResImageName     // The image name (e.g., "GC9A5979.jpg")
+    //);
+
+    //    // Load the high-res image
+    //    LoadHighResImage(highResImagePath);
+    //}
+
     void ShowImageDescription(GameObject image)
     {
         firstPersonController.enabled = false;
@@ -69,20 +91,17 @@ public class ImageInteraction : MonoBehaviour
         string lowResImageName = image.name; // Make sure your GameObject's name is the same as the image file name
 
         // Construct the path to the corresponding high-res image
-        //string highResImagePath = Path.Combine(
-        //    @"C:\Users\mikyl\OneDrive\Desktop\ImagesHigh", // Adjust the path as necessary
-        //    lowResImageName
-        //);
         string highResImagePath = Path.Combine(
-        Application.dataPath, // Path to the Assets folder
-        "Images",            // The folder within Assets
-        "ImagesHigh",       // The subfolder for high-resolution images
-        lowResImageName     // The image name (e.g., "GC9A5979.jpg")
-    );
+            Application.streamingAssetsPath, // Use the StreamingAssets folder
+            "Images",
+            "ImagesHigh",                   // The subfolder for high-resolution images
+            lowResImageName                 // The image name (e.g., "GC9A5979.jpg")
+        );
 
         // Load the high-res image
         LoadHighResImage(highResImagePath);
     }
+
 
     void LoadHighResImage(string path)
     {

@@ -22,7 +22,9 @@ public class ImagePlacer : MonoBehaviour
         PlaceImages();
         PlaceImages();
         //photoViewer.LoadImagesAfterStart("C:\\Users\\mikyl\\OneDrive\\Desktop\\ImagesLow");
-        photoViewer.LoadImagesAfterStart(Path.Combine(Application.dataPath, "Images", "ImagesLow"));
+        //photoViewer.LoadImagesAfterStart(Path.Combine(Application.dataPath, "Images", "ImagesLow"));
+        photoViewer.LoadImagesAfterStart(Path.Combine(Application.streamingAssetsPath, "Images", "ImagesLow"));
+
 
     }
 
