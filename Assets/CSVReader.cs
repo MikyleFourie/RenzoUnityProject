@@ -17,20 +17,18 @@ public class CSVReader : MonoBehaviour
         {
             data = ReadCSV(csvData.text);
 
-            // Log headers for debugging
-            string[] headers = csvData.text.Split(new[] { "\r\n", "\n" }, System.StringSplitOptions.None)[0].Split(',');
-            foreach (var header in headers)
-            {
-                Debug.Log("Header: " + header);
-            }
-
+            // Debugging the first 50 rows
             int count = 0;
-            foreach (var entry in data)
+            for (int i = 0; i < Mathf.Min(data.Count, 50); i++) // Process only the first 50 rows
             {
-                Debug.Log("Item title: " + entry["titleEn"]); // This line may still throw an error
+                Debug.Log($"Item {i + 1}:");
+                foreach (var header in data[i])
+                {
+                    Debug.Log($"{header.Key}: {header.Value}");
+                }
                 count++;
             }
-            Debug.Log("Count: " + count);
+            Debug.Log("Total Count: " + count);
         }
         else
         {
@@ -42,36 +40,78 @@ public class CSVReader : MonoBehaviour
     {
         List<Dictionary<string, string>> data = new List<Dictionary<string, string>>();
 
-        // Split the CSV text into lines
-        string[] lines = csvText.Split(new[] { "\r\n", "\n" }, System.StringSplitOptions.None);
-
-        // Split the first line to get headers using semicolons
-        headers = lines[0].Split(';');
-
-        // Read each subsequent line
-        for (int i = 1; i < lines.Length; i++)
+        // Use a StringReader to process the CSV line by line
+        using (StringReader reader = new StringReader(csvText))
         {
-            string[] values = lines[i].Split(';');
-
-            // Check if the number of values matches the number of headers
-            if (values.Length != headers.Length)
+            string line;
+            // Read the header line
+            string headerLine = reader.ReadLine();
+            if (headerLine != null)
             {
-                Debug.LogWarning($"Line {i + 1} has an inconsistent number of columns. Skipping this line.");
-                continue; // Skip lines with inconsistent columns
+                headers = headerLine.Split(';'); // Use semicolon for values
             }
 
-            Dictionary<string, string> entry = new Dictionary<string, string>();
-
-            // Populate the dictionary
-            for (int j = 0; j < headers.Length; j++)
+            // Read each subsequent line
+            int lineNumber = 1;
+            while ((line = reader.ReadLine()) != null && lineNumber <= 50) // Limit to 50 rows
             {
-                entry[headers[j]] = values[j];
-            }
+                // Debug the line being processed
+                Debug.Log($"Processing row {lineNumber}: {line}");
 
-            data.Add(entry);
+                string[] values = ParseCSVLine(line);
+
+                // Check if the values length matches headers to avoid out-of-bounds errors
+                if (values.Length == headers.Length)
+                {
+                    Dictionary<string, string> entry = new Dictionary<string, string>();
+
+                    for (int j = 0; j < headers.Length; j++)
+                    {
+                        entry[headers[j].Trim()] = values[j].Trim().Trim('"'); // Trim quotes and spaces
+                    }
+
+                    data.Add(entry);
+                }
+                else
+                {
+                    Debug.LogWarning($"Skipping line {lineNumber} due to inconsistent number of columns. {lineNumber} has {values.Length} columns, where there should be {headers.Length} columns");
+                }
+                lineNumber++;
+            }
         }
 
         return data;
     }
 
+    string[] ParseCSVLine(string line)
+    {
+        List<string> result = new List<string>();
+        bool inQuotes = false;
+        string currentValue = "";
+
+        foreach (char c in line)
+        {
+            if (c == '"') // Handle quotes
+            {
+                inQuotes = !inQuotes; // Toggle inQuotes state
+                                      // Only add quote to the value if it's the second quote (indicating it's part of the value)
+                if (currentValue.Length > 0 && currentValue[currentValue.Length - 1] == '"')
+                {
+                    currentValue = currentValue.Remove(currentValue.Length - 1); // Remove the previous quote
+                }
+            }
+            else if (c == ';' && !inQuotes) // Handle semicolon as separator if not within quotes
+            {
+                result.Add(currentValue.Trim());
+                currentValue = "";
+            }
+            else
+            {
+                currentValue += c; // Add characters to current value
+            }
+        }
+
+        result.Add(currentValue.Trim()); // Add the last value
+        return result.ToArray();
+    }
 }
