@@ -1370,7 +1370,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7bcddeedf87abef4f9d6ec5164359225, type: 2}
+  - {fileID: 2100000, guid: b27a570e4753cc547adb29f303b30dad, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1776,6 +1776,7 @@ GameObject:
   - component: {fileID: 420321789}
   - component: {fileID: 420321791}
   - component: {fileID: 420321792}
+  - component: {fileID: 420321793}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -1796,7 +1797,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imagePrefab: {fileID: 9144649883242356614, guid: c15eb072f2193ba46b040bd324aabb03, type: 3}
-  imageCount: 600
+  imageCount: 723
   roomSize: {x: 80, y: 60}
   minSpacing: 2
   minHeight: 2
@@ -1830,9 +1831,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f1905345edd8184eb70549139b458b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imageObjs: []
-  textures: []
-  validImages: []
 --- !u!114 &420321792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1845,6 +1843,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53edcf535f84ce342809806fdc7a513c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &420321793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420321788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c4778ef5b17ff44091bfcc29063b70a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: GAC_CSV - Origins Centre Wits University
+  headers: []
 --- !u!1 &454059221
 GameObject:
   m_ObjectHideFlags: 0
@@ -7243,7 +7255,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 106c810b6f7e9664280a7536c79a7efc, type: 2}
+  - {fileID: 2100000, guid: b27a570e4753cc547adb29f303b30dad, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9164,7 +9176,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d48241f8f9734fd4bbdaecf66d252c26, type: 2}
+  - {fileID: 2100000, guid: 07b08d93453c8b74db32802220277f31, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9270,7 +9282,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d48241f8f9734fd4bbdaecf66d252c26, type: 2}
+  - {fileID: 2100000, guid: 07b08d93453c8b74db32802220277f31, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9541,7 +9553,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 106c810b6f7e9664280a7536c79a7efc, type: 2}
+  - {fileID: 2100000, guid: b27a570e4753cc547adb29f303b30dad, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15829,7 +15841,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7bcddeedf87abef4f9d6ec5164359225, type: 2}
+  - {fileID: 2100000, guid: b27a570e4753cc547adb29f303b30dad, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -16076,6 +16088,8 @@ MonoBehaviour:
   descriptionPanel: {fileID: 1414117573}
   aimPanel: {fileID: 1656989413}
   firstPersonController: {fileID: 913445236}
+  highResImageDisplay: {fileID: 1060594251}
+  descriptionText: {fileID: 1857751839}
 --- !u!1 &2123698574
 GameObject:
   m_ObjectHideFlags: 0
