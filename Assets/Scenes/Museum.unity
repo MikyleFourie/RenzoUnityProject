@@ -9560,7 +9560,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 604466986}
+    m_TransformParent: {fileID: 468443372}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_LocalScale.x
@@ -9617,7 +9617,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 3986188387995331715, guid: 60137d8684131d147bcd387a6d01ca0a, type: 3}
+      objectReference: {fileID: 2100000, guid: 3148068ec924bdd46bb9aa031608fa8f, type: 2}
     - target: {fileID: 919132149155446097, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_Name
       value: BigRock5 (6)
@@ -10769,15 +10769,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 604466986}
+    m_TransformParent: {fileID: 468443372}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2490.87
+      value: 2490.8704
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2490.87
+      value: 2490.8704
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_LocalScale.z
@@ -10826,7 +10826,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 3986188387995331715, guid: 60137d8684131d147bcd387a6d01ca0a, type: 3}
+      objectReference: {fileID: 2100000, guid: 3148068ec924bdd46bb9aa031608fa8f, type: 2}
     - target: {fileID: 919132149155446097, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_Name
       value: BigRock5 (8)
@@ -17154,6 +17154,43 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 36fbb884417f3e9419f48691fab313a7, type: 3}
   m_PrefabInstance: {fileID: 459933196}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &468443371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 468443372}
+  m_Layer: 0
+  m_Name: Clouds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &468443372
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468443371}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 615960902}
+  - {fileID: 315004368}
+  - {fileID: 647616452}
+  - {fileID: 1649472726}
+  - {fileID: 910164163}
+  - {fileID: 352595427}
+  m_Father: {fileID: 604466986}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &468846052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20331,7 +20368,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 3986188387995331715, guid: 60137d8684131d147bcd387a6d01ca0a, type: 3}
+      objectReference: {fileID: 2100000, guid: 3148068ec924bdd46bb9aa031608fa8f, type: 2}
     - target: {fileID: 919132149155446097, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_Name
       value: BigRock5 (2)
@@ -22741,12 +22778,7 @@ Transform:
   - {fileID: 548385704}
   - {fileID: 554549891}
   - {fileID: 1824805128}
-  - {fileID: 615960902}
-  - {fileID: 315004368}
-  - {fileID: 647616452}
-  - {fileID: 1649472726}
-  - {fileID: 910164163}
-  - {fileID: 352595427}
+  - {fileID: 468443372}
   - {fileID: 1017390559}
   - {fileID: 698082497}
   - {fileID: 510538329}
@@ -22984,7 +23016,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 604466986}
+    m_TransformParent: {fileID: 468443372}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_LocalScale.x
@@ -23041,7 +23073,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 3986188387995331715, guid: 60137d8684131d147bcd387a6d01ca0a, type: 3}
+      objectReference: {fileID: 2100000, guid: 3148068ec924bdd46bb9aa031608fa8f, type: 2}
     - target: {fileID: 919132149155446097, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_Name
       value: BigRock5 (5)
@@ -23688,15 +23720,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 604466986}
+    m_TransformParent: {fileID: 468443372}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3000
+      value: 2999.9998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3000
+      value: 2999.9998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_LocalScale.z
@@ -23745,7 +23777,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 3986188387995331715, guid: 60137d8684131d147bcd387a6d01ca0a, type: 3}
+      objectReference: {fileID: 2100000, guid: 3148068ec924bdd46bb9aa031608fa8f, type: 2}
     - target: {fileID: 919132149155446097, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_Name
       value: BigRock5 (7)
@@ -29414,11 +29446,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 604466986}
+    m_TransformParent: {fileID: 468443372}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2490.87
+      value: 2490.8704
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_LocalScale.y
@@ -29471,7 +29503,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 3986188387995331715, guid: 60137d8684131d147bcd387a6d01ca0a, type: 3}
+      objectReference: {fileID: 2100000, guid: 3148068ec924bdd46bb9aa031608fa8f, type: 2}
     - target: {fileID: 919132149155446097, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_Name
       value: BigRock5 (10)
@@ -32106,7 +32138,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 3986188387995331715, guid: 60137d8684131d147bcd387a6d01ca0a, type: 3}
+      objectReference: {fileID: 2100000, guid: 3148068ec924bdd46bb9aa031608fa8f, type: 2}
     - target: {fileID: 919132149155446097, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_Name
       value: BigRock5 (4)
@@ -54843,15 +54875,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 604466986}
+    m_TransformParent: {fileID: 468443372}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3000
+      value: 3000.0002
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3000
+      value: 3000.0002
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_LocalScale.z
@@ -54900,7 +54932,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 3986188387995331715, guid: 60137d8684131d147bcd387a6d01ca0a, type: 3}
+      objectReference: {fileID: 2100000, guid: 3148068ec924bdd46bb9aa031608fa8f, type: 2}
     - target: {fileID: 919132149155446097, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_Name
       value: BigRock5 (9)
@@ -59706,7 +59738,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 3986188387995331715, guid: 60137d8684131d147bcd387a6d01ca0a, type: 3}
+      objectReference: {fileID: 2100000, guid: 3148068ec924bdd46bb9aa031608fa8f, type: 2}
     - target: {fileID: 919132149155446097, guid: e906a817389d29d43833deae9faa7bf7, type: 3}
       propertyPath: m_Name
       value: BigRock5 (3)
