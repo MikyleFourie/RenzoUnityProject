@@ -12673,7 +12673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imagePrefab: {fileID: 9144649883242356614, guid: c15eb072f2193ba46b040bd324aabb03, type: 3}
-  imageCount: 723
+  imageCount: 785
   roomSize: {x: 80, y: 60}
   minSpacing: 2
   minHeight: 2
@@ -12726,7 +12726,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 420321788}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c4778ef5b17ff44091bfcc29063b70a, type: 3}
   m_Name: 

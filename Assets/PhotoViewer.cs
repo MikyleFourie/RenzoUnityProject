@@ -43,7 +43,8 @@ public class PhotoViewer : MonoBehaviour
         // Filter by supported extensions
         foreach (string file in imageFiles)
         {
-            if (file.EndsWith(".png") || file.EndsWith(".jpg") || file.EndsWith(".JPG"))
+            //All valid file types
+            if (file.EndsWith(".png") || file.EndsWith(".jpg") || file.EndsWith(".JPG") || file.EndsWith(".JPG"))
             {
                 validImages.Add(file);
             }
@@ -60,7 +61,7 @@ public class PhotoViewer : MonoBehaviour
         int totalImageObjects = imageObjs.Length;
         Debug.Log("imageObjs.Count total: " + totalImageObjects);
         // Ensure we only consider the valid image file count
-        int maxImagesToLoad = Mathf.Min(filePaths.Length, totalImageObjects, 723); // Limit to 723 basically
+        int maxImagesToLoad = Mathf.Min(filePaths.Length, totalImageObjects /*, 723*/); // Limit to 723 basically
         Debug.Log("maxImagestoLoad: " + maxImagesToLoad);
 
 
@@ -146,7 +147,7 @@ public class PhotoViewer : MonoBehaviour
         Debug.Log("shuffledPaths.Count: " + shuffledPaths.Count);
 
         // Randomly assign the same 723 low-res images to the untextured image objects
-        for (int i = 0; i < Mathf.Min(723, untexturedImages.Count); i++)
+        for (int i = 0; i < Mathf.Min(/*723,*/ untexturedImages.Count); i++)
         {
             string filePath = "file:///" + shuffledPaths[i];  // File URI format
             //Debug.Log("shuffledPaths at: " + i);
