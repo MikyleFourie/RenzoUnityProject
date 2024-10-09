@@ -29770,7 +29770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
-  mouseSensitivity: 30
+  mouseSensitivity: 200
 --- !u!136 &913445237
 CapsuleCollider:
   m_ObjectHideFlags: 0
