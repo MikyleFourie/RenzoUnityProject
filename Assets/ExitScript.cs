@@ -10,7 +10,7 @@ public class ExitScript : MonoBehaviour
     private void Start()
     {
         QualitySettings.vSyncCount = 0;  // VSync must be disabled
-        Application.targetFrameRate = 30;//lock frame rate;
+        //Application.targetFrameRate = 30;//lock frame rate;
 
         
     }

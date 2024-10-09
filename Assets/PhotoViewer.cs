@@ -122,7 +122,7 @@ public class PhotoViewer : MonoBehaviour
         }
 
         Debug.Log("First Batch Complete");
-
+        /*
         // Identify image objects that still do not have textures
         List<GameObject> untexturedImages = new List<GameObject>();
 
@@ -147,7 +147,7 @@ public class PhotoViewer : MonoBehaviour
         Debug.Log("shuffledPaths.Count: " + shuffledPaths.Count);
 
         // Randomly assign the same 723 low-res images to the untextured image objects
-        for (int i = 0; i < Mathf.Min(/*723,*/ untexturedImages.Count); i++)
+        for (int i = 0; i < Mathf.Min(/*723, untexturedImages.Count); i++)
         {
             string filePath = "file:///" + shuffledPaths[i];  // File URI format
             //Debug.Log("shuffledPaths at: " + i);
@@ -192,9 +192,9 @@ public class PhotoViewer : MonoBehaviour
         }
 
         Debug.Log("Second Batch Complete(?)");
-
+        */
     }
-
+    
 
 
 }

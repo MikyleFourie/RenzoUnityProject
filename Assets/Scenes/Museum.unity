@@ -8,8 +8,8 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: 3cae6f357ef9c574cb3e9d85ee7152d1
+  m_OcclusionCullingData: {fileID: 36300000, guid: 244b36f3f186a2d4daf4b321e38d40c8, type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -29770,7 +29770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
-  mouseSensitivity: 200
+  mouseSensitivity: 30
 --- !u!136 &913445237
 CapsuleCollider:
   m_ObjectHideFlags: 0
