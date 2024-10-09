@@ -17,6 +17,8 @@ public class ImageInteraction : MonoBehaviour
     // Reference to the high-res image display in the description panel
     public Image highResImageDisplay; // UI Image component for displaying high-res images
     public TMPro.TMP_Text descriptionText; // Text component for displaying description
+    [Header("CrossHair")]
+    public GameObject HighlightCrosshair;
     void Start()
     {
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * interactionDistance, Color.red, 5f);
@@ -56,8 +58,35 @@ public class ImageInteraction : MonoBehaviour
             }
         }
 
+        RaycastHit hit2;
 
+        // Visualize the raycast in the Scene view
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * interactionDistance, Color.red, 5f);
+
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit2 /*, interactionDistance, imageLayer */))
+        {
+            //Debug.Log("Ray hit point: " + hit.point);
+            //refOrb.transform.position = hit.point;
+
+
+            // Check if the clicked object is an image
+            if (hit2.transform.CompareTag("Image"))
+            {
+                //Debug line
+                //Debug.Log("Hit this object: " + hit.transform.parent.name);
+
+                // Call a method to handle the interaction
+                HighlightCrosshair.SetActive(true);
+            }
+            
+        }
+        else
+        {
+            HighlightCrosshair.SetActive(false);
+        }
     }
+
+
 
     //void ShowImageDescription(GameObject image)
     //{
