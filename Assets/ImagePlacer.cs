@@ -19,16 +19,16 @@ public class ImagePlacer : MonoBehaviour
 
     void Start()
     {
-        PlaceImages();
+        //PlaceImages();
         //PlaceImages();
         //photoViewer.LoadImagesAfterStart("C:\\Users\\mikyl\\OneDrive\\Desktop\\ImagesLow");
         //photoViewer.LoadImagesAfterStart(Path.Combine(Application.dataPath, "Images", "ImagesLow"));
-        photoViewer.LoadImagesAfterStart(Path.Combine(Application.streamingAssetsPath, "Images", "ImagesLow"));
+        //photoViewer.LoadImagesAfterStart(Path.Combine(Application.streamingAssetsPath, "Images", "ImagesLow"));
 
 
     }
 
-    void PlaceImages()
+    public void PlaceImages()
     {
         for (int i = 0; i < imageCount; i++)
         {

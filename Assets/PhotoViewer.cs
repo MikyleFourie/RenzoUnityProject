@@ -56,6 +56,7 @@ public class PhotoViewer : MonoBehaviour
 
     private IEnumerator LoadImages(string[] filePaths)
     {
+        Debug.Log("Begin Placing Images");
         // Get all Image GameObjects and their count
         imageObjs = GameObject.FindGameObjectsWithTag("Image");
         int totalImageObjects = imageObjs.Length;
@@ -194,7 +195,7 @@ public class PhotoViewer : MonoBehaviour
         Debug.Log("Second Batch Complete(?)");
         */
     }
-    
+
 
 
 }

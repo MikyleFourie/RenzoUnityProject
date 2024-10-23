@@ -12,6 +12,7 @@ public class ImageInteraction : MonoBehaviour
     public GameObject descriptionPanel; // Reference to the description UI panel
     public GameObject aimPanel;
     public FirstPersonController firstPersonController;
+    public Manager manager;
     //public GameObject refOrb;
 
     // Reference to the high-res image display in the description panel
@@ -78,7 +79,7 @@ public class ImageInteraction : MonoBehaviour
                 // Call a method to handle the interaction
                 HighlightCrosshair.SetActive(true);
             }
-            
+
         }
         else
         {
@@ -88,27 +89,7 @@ public class ImageInteraction : MonoBehaviour
 
 
 
-    //void ShowImageDescription(GameObject image)
-    //{
-    //    firstPersonController.enabled = false;
-    //    aimPanel.SetActive(false);
-    //    descriptionPanel.SetActive(true);
 
-    //    // Get the name of the low-res image from the clicked GameObject
-    //    string lowResImageName = image.name; // Make sure your GameObject's name is the same as the image file name
-
-    //    // Construct the path to the corresponding high-res image
-
-    //    string highResImagePath = Path.Combine(
-    //    Application.dataPath, // Path to the Assets folder
-    //    "Images",            // The folder within Assets
-    //    "ImagesHigh",       // The subfolder for high-resolution images
-    //    lowResImageName     // The image name (e.g., "GC9A5979.jpg")
-    //);
-
-    //    // Load the high-res image
-    //    LoadHighResImage(highResImagePath);
-    //}
 
     void ShowImageDescription(GameObject image)
     {
@@ -118,6 +99,9 @@ public class ImageInteraction : MonoBehaviour
 
         // Get the name of the low-res image from the clicked GameObject
         string lowResImageName = image.name; // Make sure your GameObject's name is the same as the image file name
+
+        manager.UpdateDescription(lowResImageName);
+
 
         // Construct the path to the corresponding high-res image
         string highResImagePath = Path.Combine(

@@ -1,117 +1,239 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 
 public class CSVReader : MonoBehaviour
 {
-    public string fileName; // Name of the CSV file without extension
-    public string[] headers;
-    public List<Dictionary<string, string>> data;
+    public string csvFilePath; // Path to the CSV file
+    public List<ImageData> imageDataList = new List<ImageData>(); //List of each images data
+    public List<string[]> parsedRows;
+    //public CSVUpdaterTest csvUpdater;
+    string[] csvLines;
+    public List<string> cappaFileNames;
+    public List<string> lascaFileNames;
+
+    [System.Serializable]
+    // A class to store data for each image entry. With each type as a string
+    public class ImageData
+    {
+        public string itemId;
+        public string fileType;
+        public string fileSpec;
+        public string titleEn;
+        public string descriptionEn;
+        public string creatorEn;
+        public string locationCreated;
+        public string dateCreated;
+        public string timePeriod;
+        public string type;
+        public string medium;
+        public string photographer;
+        public string rights;
+    }
+
     void Start()
     {
-        // Load the CSV data as a TextAsset
-        TextAsset csvData = Resources.Load<TextAsset>("GAC_CSV - Origins Centre Wits University"); // Specify your subfolder name if needed
 
-        // Check if the CSV data was loaded successfully
-        if (csvData != null)
-        {
-            data = ReadCSV(csvData.text);
-
-            // Debugging the first 50 rows
-            int count = 0;
-            for (int i = 0; i < Mathf.Min(data.Count, 50); i++) // Process only the first 50 rows
-            {
-                Debug.Log($"Item {i + 1}:");
-                foreach (var header in data[i])
-                {
-                    Debug.Log($"{header.Key}: {header.Value}");
-                }
-                count++;
-            }
-            Debug.Log("Total Count: " + count);
-        }
-        else
-        {
-            Debug.LogError("Failed to load CSV file. Please check the file name and path.");
-        }
     }
 
-    List<Dictionary<string, string>> ReadCSV(string csvText)
+    // Reading CSV manually. This is to deal with Multi-paragraph fields
+    public List<string[]> ParseCSV(string filePath)
     {
-        List<Dictionary<string, string>> data = new List<Dictionary<string, string>>();
+        List<string[]> parsedRows = new List<string[]>();
+        bool insideQuotedField = false;
+        StringBuilder fieldBuilder = new StringBuilder();
+        List<string> currentRow = new List<string>();
 
-        // Use a StringReader to process the CSV line by line
-        using (StringReader reader = new StringReader(csvText))
+        // Read CSV line by line
+        using (StreamReader reader = new StreamReader(filePath))
         {
-            string line;
-            // Read the header line
-            string headerLine = reader.ReadLine();
-            if (headerLine != null)
+            while (!reader.EndOfStream)
             {
-                headers = headerLine.Split(';'); // Use semicolon for values
-            }
+                string line = reader.ReadLine();
+                string[] fields = line.Split(';');
 
-            // Read each subsequent line
-            int lineNumber = 1;
-            while ((line = reader.ReadLine()) != null && lineNumber <= 50) // Limit to 50 rows
-            {
-                // Debug the line being processed
-                Debug.Log($"Processing row {lineNumber}: {line}");
-
-                string[] values = ParseCSVLine(line);
-
-                // Check if the values length matches headers to avoid out-of-bounds errors
-                if (values.Length == headers.Length)
+                foreach (string field in fields)
                 {
-                    Dictionary<string, string> entry = new Dictionary<string, string>();
-
-                    for (int j = 0; j < headers.Length; j++)
+                    if (insideQuotedField)
                     {
-                        entry[headers[j].Trim()] = values[j].Trim().Trim('"'); // Trim quotes and spaces
-                    }
+                        // Continue building the current field until closing quote is found
+                        fieldBuilder.Append("\n" + field);
 
-                    data.Add(entry);
+                        // If this field ends with a quote, we're done
+                        if (field.EndsWith("\""))
+                        {
+                            insideQuotedField = false;
+                            currentRow.Add(fieldBuilder.ToString());
+                            fieldBuilder.Clear();
+                        }
+                    }
+                    else
+                    {
+                        // Normal case: field is either not quoted or quotes are balanced
+                        if (field.StartsWith("\"") && !field.EndsWith("\""))
+                        {
+                            // Start of a multi-paragraph field
+                            insideQuotedField = true;
+                            fieldBuilder.Append(field);
+                        }
+                        else
+                        {
+                            // Standard field, just add it
+                            currentRow.Add(field);
+                        }
+                    }
                 }
-                else
+
+                // Once the row is complete, add it to the list of rows
+                if (!insideQuotedField)
                 {
-                    Debug.LogWarning($"Skipping line {lineNumber} due to inconsistent number of columns. {lineNumber} has {values.Length} columns, where there should be {headers.Length} columns");
+                    parsedRows.Add(currentRow.ToArray());
+                    currentRow.Clear();
                 }
-                lineNumber++;
             }
         }
 
-        return data;
+        //Debug Code to show all the parsed Rows in console------------
+        //Debug.Log("Showing Parsed Rows:");
+        //string displayString = "";
+        //foreach (string[] row in parsedRows)
+        //{
+        //    displayString = "";
+        //    foreach (string item in row)
+        //    {
+        //        displayString += item + "#";
+        //    }
+        //    displayString += "\n";
+        //    Debug.Log(displayString);
+        //}
+        //-------------------------------------------------------------
+
+        saveParsedRows(parsedRows);
+        return parsedRows;
     }
 
-    string[] ParseCSVLine(string line)
+    void saveParsedRows(List<string[]> parsedRows)
     {
-        List<string> result = new List<string>();
-        bool inQuotes = false;
-        string currentValue = "";
 
-        foreach (char c in line)
+        for (int i = 1; i < parsedRows.Count; i++)
         {
-            if (c == '"') // Handle quotes
+            string[] row = parsedRows[i];
+            ImageData imageData = new ImageData
             {
-                inQuotes = !inQuotes; // Toggle inQuotes state
-                                      // Only add quote to the value if it's the second quote (indicating it's part of the value)
-                if (currentValue.Length > 0 && currentValue[currentValue.Length - 1] == '"')
-                {
-                    currentValue = currentValue.Remove(currentValue.Length - 1); // Remove the previous quote
-                }
+                itemId = row[0],
+                fileType = row[1],
+                fileSpec = row[2],
+                titleEn = row[3],
+                descriptionEn = row[4],
+                creatorEn = row[5],
+                locationCreated = row[6],
+                dateCreated = row[7],
+                timePeriod = row[8],
+                type = row[9],
+                medium = row[10],
+                photographer = row[11],
+                rights = row[12]
+            };
+
+            // Add the parsed ImageData to the list
+            imageDataList.Add(imageData);
+        }
+
+        string displayText = "";
+        foreach (var image in imageDataList)
+        {
+            displayText += "itemId: " + image.itemId + "\n";
+            displayText += "fileType: " + image.fileType + "\n";
+            displayText += "fileSpec: " + image.fileSpec + "\n";
+            displayText += "titleEn: " + image.titleEn + "\n";
+            displayText += "descriptionEn: " + image.descriptionEn + "\n";
+            displayText += "creatorEn: " + image.creatorEn + "\n";
+            displayText += "location: " + image.locationCreated + "\n";
+            displayText += "dateCreated: " + image.dateCreated + "\n";
+            displayText += "timePeriod: " + image.timePeriod + "\n";
+            displayText += "type: " + image.type + "\n";
+            displayText += "medium: " + image.medium + "\n";
+            displayText += "photographer: " + image.photographer + "\n";
+            displayText += "rights: " + image.rights + "\n";
+            displayText += "\n";
+        }
+
+
+        //csvUpdater.UpdateText(displayText);
+        Debug.Log("Done Loading CSV");
+    }
+
+    // Searches through the List of Images for the matching one
+    public string GetDescription(string imageName)
+    {
+        string displayText = "";
+        bool imageFound = false;
+
+        foreach (ImageData image in imageDataList)
+        {
+            if (imageName.Equals(image.fileSpec))
+            {
+                imageFound = true;
+
+                // Helper function to replace empty values with "N/A"
+                string CheckValue(string value) => string.IsNullOrEmpty(value) ? "N/A" : value;
+
+                displayText += CheckValue(image.titleEn) + "\n\n";
+                displayText += image.descriptionEn + "\n\n";
+                displayText += "Created by: " + CheckValue(image.creatorEn) + "\n";
+                displayText += "Location: " + CheckValue(image.locationCreated) + "\n";
+                displayText += "Date Displayed: " + CheckValue(image.dateCreated) + "\n";
+                displayText += "Time Period: " + CheckValue(image.timePeriod) + "\n";
+                displayText += "Type: " + CheckValue(image.type) + "\n";
+                displayText += "Medium: " + CheckValue(image.medium) + "\n";
+                displayText += "Photographer: " + CheckValue(image.photographer) + "\n";
+                displayText += "Rights: " + CheckValue(image.rights) + "\n";
+
+                return displayText; // Exit after finding the first match
             }
-            else if (c == ';' && !inQuotes) // Handle semicolon as separator if not within quotes
+        }
+
+        foreach (string fileName in cappaFileNames)
+        {
+            if (imageName == fileName)
             {
-                result.Add(currentValue.Trim());
-                currentValue = "";
+                imageFound = true;
+
+                displayText += "Cranio de Prozostrodon brasiliensis \n\n";
+                displayText += "Foto de Leonardo Kerber, do Programa de Pós-Graduação em Biodiversidade Animal da UFSM \n\n";
+                displayText += "Image provided by CAPPA - Centro de Apoio à Pesquisa Paleontológica da Quarta Colônia";
+            }
+        }
+
+        foreach (string fileName in lascaFileNames)
+        {
+            if (imageName == fileName)
+            {
+                imageFound = true;
+
+                displayText += "Cerâmica Tupi-Guarani \n\n";
+                displayText += "vasilha cerâmica com tratamento de superfície corrugado  \n\n";
+                displayText += "Image provided by LASCA - Laboratório de Arqueologia, Sociedades e Culturas das Américas\n";
+                displayText += "Found and/or Studied in São João do Polêsine & Santa Maria ";
+            }
+        }
+
+        // If no image was found, determine the default message
+        if (!imageFound)
+        {
+            // Check if imageName starts with "textile" (case-insensitive)
+            if (imageName.ToLower().StartsWith("textil"))
+            {
+                displayText = "Image of Textiles provided by LabInter from Brazil.";
             }
             else
             {
-                currentValue += c; // Add characters to current value
+                displayText = "Information not available. Image provided by the University of the Witwatersrand";
             }
         }
 
-        result.Add(currentValue.Trim()); // Add the last value
-        return result.ToArray();
+        return displayText;
     }
 }

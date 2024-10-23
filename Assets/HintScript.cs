@@ -13,7 +13,7 @@ public class HintScript : MonoBehaviour
     private bool textOrNote;
     void Start()
     {
-        textOrNote = true;
+        textOrNote = false;
         StickyNote001.SetActive(false);
         StickyNote001.SetActive(false);
         Text001.SetActive(false);
@@ -23,12 +23,12 @@ public class HintScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(2))
+        if (Input.GetMouseButtonDown(2))
         {
             textOrNote = !textOrNote;
         }
 
-        if(textOrNote)
+        if (textOrNote)
         {
             StickyNote001.SetActive(true);
             StickyNote002.SetActive(true);
