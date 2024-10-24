@@ -38985,9 +38985,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Tania Olsson\r\nWillem Boshoff\r\nTsonga\r\nOvambo\r\nJulie Grant\r\nShona\r\nTonga\r\nNorthern
     Sotho\r\nBantu-language speakers\r\nPeter Magubane\r\nZhizo Culture\r\nLuchazi\r\nTsonga,
-    Zulu, Ndebele\r\nNdebele\r\nK2 and Mapungubwe\r\nSarah Wurz\r\nSouth African
-    Government\r\nChristopher Henshilwood, Craig Foster, Petro Keene\r\nPetro Keene
-    and Carl von Ribbeck \r\nLachlan Matthews\r\nUnknown Authors"
+    Zulu, Ndebele\r\r\nK2 and Mapungubwe\r\nSarah Wurz\r\nSouth African Government\r\nChristopher
+    Henshilwood, Craig Foster, Petro Keene\r\nPetro Keene and Carl von Ribbeck \r\nLachlan
+    Matthews\r\nUnknown Authors, And Artists"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f1c050a17c18ac84f9277aee6705909b, type: 2}
   m_sharedMaterial: {fileID: -4180061145678328554, guid: f1c050a17c18ac84f9277aee6705909b, type: 2}
