@@ -110,6 +110,7 @@ public class CSVReader : MonoBehaviour
         //}
         //-------------------------------------------------------------
 
+        Debug.Log("Number of images with information from CSV: " + parsedRows.Count);
         saveParsedRows(parsedRows);
         return parsedRows;
     }
@@ -223,15 +224,7 @@ public class CSVReader : MonoBehaviour
         // If no image was found, determine the default message
         if (!imageFound)
         {
-            // Check if imageName starts with "textile" (case-insensitive)
-            if (imageName.ToLower().StartsWith("textil"))
-            {
-                displayText = "Image of Textiles provided by Universidade Federal de Santa Maria & LabInter from Brazil.";
-            }
-            else
-            {
-                displayText = "Information not available. Image provided by the University of the Witwatersrand";
-            }
+            displayText = "Information about this Image is not available. \nThe Image was provided by the Origin Centre of the University of the Witwatersrand";
         }
 
         return displayText;

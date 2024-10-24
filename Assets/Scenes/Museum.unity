@@ -13295,6 +13295,7 @@ MonoBehaviour:
   ImagePlacer: {fileID: 420321789}
   PhotoViewer: {fileID: 420321791}
   CSVReader: {fileID: 420321796}
+  repitions: 1
 --- !u!1001 &435004812
 PrefabInstance:
   m_ObjectHideFlags: 0

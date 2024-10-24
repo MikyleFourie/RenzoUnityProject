@@ -11,21 +11,9 @@ public class PhotoViewer : MonoBehaviour
     Texture2D[] textures; // Array to store loaded textures
     List<string> validImages = new List<string>();
 
-    //string[] files;
-    //string pathPreFix;
-
-    // Use this for initialization
-    void Start()
-    {
-    }
 
 
-    void Update()
-    {
-
-    }
-
-    public void LoadImagesAfterStart(string folderPath)
+    public void LoadImagesAfterStart(string folderPath, int repitions)
     {
         // Find all GameObjects with the "Image" tag
         imageObjs = GameObject.FindGameObjectsWithTag("Image");
@@ -44,25 +32,25 @@ public class PhotoViewer : MonoBehaviour
         foreach (string file in imageFiles)
         {
             //All valid file types
-            if (file.EndsWith(".png") || file.EndsWith(".jpg") || file.EndsWith(".JPG") || file.EndsWith(".JPG"))
+            if (file.EndsWith(".png") || file.EndsWith(".jpeg") || file.EndsWith(".jpg") || file.EndsWith(".JEPG") || file.EndsWith(".JPG"))
             {
                 validImages.Add(file);
             }
         }
 
         textures = new Texture2D[validImages.Count];
-        StartCoroutine(LoadImages(validImages.ToArray()));
+        StartCoroutine(LoadImages(validImages.ToArray(), repitions));
     }
 
-    private IEnumerator LoadImages(string[] filePaths)
+    private IEnumerator LoadImages(string[] filePaths, int repitions)
     {
         Debug.Log("Begin Placing Images");
         // Get all Image GameObjects and their count
         imageObjs = GameObject.FindGameObjectsWithTag("Image");
         int totalImageObjects = imageObjs.Length;
-        Debug.Log("imageObjs.Count total: " + totalImageObjects);
+        Debug.Log("imageObjects in scene total: " + totalImageObjects);
         // Ensure we only consider the valid image file count
-        int maxImagesToLoad = Mathf.Min(filePaths.Length, totalImageObjects /*, 723*/); // Limit to 723 basically
+        int maxImagesToLoad = Mathf.Min(filePaths.Length, totalImageObjects);
         Debug.Log("maxImagestoLoad: " + maxImagesToLoad);
 
 
@@ -122,78 +110,85 @@ public class PhotoViewer : MonoBehaviour
             }
         }
 
-        Debug.Log("First Batch Complete");
-        /*
-        // Identify image objects that still do not have textures
-        List<GameObject> untexturedImages = new List<GameObject>();
+        Debug.Log("Batch 1 Complete");
 
-        for (int i = 0; i < totalImageObjects; i++)
+        int count = 2;
+        while (count <= repitions)
         {
-            if (imageObjs[i].GetComponent<Renderer>().material.mainTexture == null)
+            Debug.Log("Batch " + count + " start");
+            // Identify image objects that still do not have textures
+            List<GameObject> untexturedImages = new List<GameObject>();
+
+            for (int i = 0; i < totalImageObjects; i++)
             {
-                untexturedImages.Add(imageObjs[i]);
-            }
-        }
-        Debug.Log("untexturedimages.Count: " + untexturedImages.Count);
-        // Shuffle the paths again for randomness
-        shuffledPaths.Clear();
-        shuffledPaths = new List<string>(filePaths);
-        for (int i = 0; i < shuffledPaths.Count; i++)
-        {
-            string temp = shuffledPaths[i];
-            int randomIndex = Random.Range(i, shuffledPaths.Count);
-            shuffledPaths[i] = shuffledPaths[randomIndex];
-            shuffledPaths[randomIndex] = temp;
-        }
-        Debug.Log("shuffledPaths.Count: " + shuffledPaths.Count);
-
-        // Randomly assign the same 723 low-res images to the untextured image objects
-        for (int i = 0; i < Mathf.Min(/*723, untexturedImages.Count); i++)
-        {
-            string filePath = "file:///" + shuffledPaths[i];  // File URI format
-            //Debug.Log("shuffledPaths at: " + i);
-            using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(filePath))
-            {
-                yield return uwr.SendWebRequest();
-
-                if (uwr.result == UnityWebRequest.Result.ConnectionError || uwr.result == UnityWebRequest.Result.ProtocolError)
+                if (imageObjs[i].GetComponent<Renderer>().material.mainTexture == null)
                 {
-                    Debug.LogError("Error loading image: " + uwr.error);
-                }
-                else
-                {
-                    Texture2D texture = DownloadHandlerTexture.GetContent(uwr);
-                    //textures[maxImagesToLoad + i] = texture; // Store the duplicate textures in the textures array
-
-                    // Apply the texture to the respective GameObject's material
-                    untexturedImages[i].GetComponent<Renderer>().material.mainTexture = texture;
-
-                    // Set the name of the GameObject to the filename of the loaded image
-                    untexturedImages[i].name = Path.GetFileName(shuffledPaths[i]);
-
-                    // Get the aspect ratio of the image
-                    float imageAspectRatio = (float)texture.width / texture.height;
-
-                    // Adjust the local scale to maintain the aspect ratio
-                    Vector3 scale = untexturedImages[i].transform.localScale;
-
-                    if (imageAspectRatio > 1f) // Landscape orientation
-                    {
-                        scale.x = scale.y * imageAspectRatio;  // Adjust width based on aspect ratio
-                    }
-                    else // Portrait or square orientation
-                    {
-                        scale.y = scale.x / imageAspectRatio;  // Adjust height based on aspect ratio
-                    }
-
-                    // Set the new scale to the image plane
-                    untexturedImages[i].transform.localScale = scale;
+                    untexturedImages.Add(imageObjs[i]);
                 }
             }
+            Debug.Log("untexturedimages.Count: " + untexturedImages.Count);
+            // Shuffle the paths again for randomness
+            shuffledPaths.Clear();
+            shuffledPaths = new List<string>(filePaths);
+            for (int i = 0; i < shuffledPaths.Count; i++)
+            {
+                string temp = shuffledPaths[i];
+                int randomIndex = Random.Range(i, shuffledPaths.Count);
+                shuffledPaths[i] = shuffledPaths[randomIndex];
+                shuffledPaths[randomIndex] = temp;
+            }
+            Debug.Log("shuffledPaths.Count: " + shuffledPaths.Count);
+
+            // Randomly assign the same low-res images to the untextured image objects
+            for (int i = 0; i < untexturedImages.Count; i++)
+            {
+                string filePath = "file:///" + shuffledPaths[i];  // File URI format
+                                                                  //Debug.Log("shuffledPaths at: " + i);
+                using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(filePath))
+                {
+                    yield return uwr.SendWebRequest();
+
+                    if (uwr.result == UnityWebRequest.Result.ConnectionError || uwr.result == UnityWebRequest.Result.ProtocolError)
+                    {
+                        Debug.LogError("Error loading image: " + uwr.error);
+                    }
+                    else
+                    {
+                        Texture2D texture = DownloadHandlerTexture.GetContent(uwr);
+                        //textures[maxImagesToLoad + i] = texture; // Store the duplicate textures in the textures array
+
+                        // Apply the texture to the respective GameObject's material
+                        untexturedImages[i].GetComponent<Renderer>().material.mainTexture = texture;
+
+                        // Set the name of the GameObject to the filename of the loaded image
+                        untexturedImages[i].name = Path.GetFileName(shuffledPaths[i]);
+
+                        // Get the aspect ratio of the image
+                        float imageAspectRatio = (float)texture.width / texture.height;
+
+                        // Adjust the local scale to maintain the aspect ratio
+                        Vector3 scale = untexturedImages[i].transform.localScale;
+
+                        if (imageAspectRatio > 1f) // Landscape orientation
+                        {
+                            scale.x = scale.y * imageAspectRatio;  // Adjust width based on aspect ratio
+                        }
+                        else // Portrait or square orientation
+                        {
+                            scale.y = scale.x / imageAspectRatio;  // Adjust height based on aspect ratio
+                        }
+
+                        // Set the new scale to the image plane
+                        untexturedImages[i].transform.localScale = scale;
+                    }
+                }
+            }
+
+            Debug.Log("Batch" + count + " Complete");
+            count++;
         }
 
-        Debug.Log("Second Batch Complete(?)");
-        */
+
     }
 
 

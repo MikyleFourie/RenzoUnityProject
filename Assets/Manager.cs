@@ -11,16 +11,20 @@ public class Manager : MonoBehaviour
     public ImagePlacer ImagePlacer;
     public PhotoViewer PhotoViewer;
     public CSVReader CSVReader;
+
+    public int repitions = 1;
     // Start is called before the first frame update
     void Start()
     {
-        //ImagePlacer = this.ImagePlacer;
-        //PhotoViewer = this.PhotoViewer;
-        //CSVReader = this.CSVReader;
+        if (repitions < 1) repitions = 1;
 
         CSVReader.ParseCSV(csvFilePath);
-        ImagePlacer.PlaceImages();
-        PhotoViewer.LoadImagesAfterStart(Path.Combine(Application.streamingAssetsPath, "Images", "ImagesLow"));
+        ImagePlacer.GetNumberOfImageFilesInFolder(Path.Combine(Application.streamingAssetsPath, "Images", "ImagesLow"));
+        for (int i = 0; i < repitions; i++)
+        {
+            ImagePlacer.PlaceImages();
+        }
+        PhotoViewer.LoadImagesAfterStart(Path.Combine(Application.streamingAssetsPath, "Images", "ImagesLow"), repitions);
     }
 
     // Updates the image description

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public class ImagePlacer : MonoBehaviour
@@ -17,19 +18,41 @@ public class ImagePlacer : MonoBehaviour
 
     public PhotoViewer photoViewer;
 
-    void Start()
+    // Function that returns the number of image files in a folder (e.g., jpg, png)
+    public void GetNumberOfImageFilesInFolder(string folderPath)
     {
-        //PlaceImages();
-        //PlaceImages();
-        //photoViewer.LoadImagesAfterStart("C:\\Users\\mikyl\\OneDrive\\Desktop\\ImagesLow");
-        //photoViewer.LoadImagesAfterStart(Path.Combine(Application.dataPath, "Images", "ImagesLow"));
-        //photoViewer.LoadImagesAfterStart(Path.Combine(Application.streamingAssetsPath, "Images", "ImagesLow"));
+        // Define allowed image file extensions
+        string[] validExtensions = { ".jpg", ".jpeg", ".png", ".bmp", ".gif" };
 
+        // Check if the directory exists
+        if (Directory.Exists(folderPath))
+        {
+            // Get all the files in the directory
+            string[] allFiles = Directory.GetFiles(folderPath);
 
+            // Filter the files based on their extensions
+            int imageFileCount = 0;
+            foreach (string file in allFiles)
+            {
+                if (validExtensions.Contains(Path.GetExtension(file).ToLower()))
+                {
+                    imageFileCount++;
+                }
+            }
+
+            imageCount = imageFileCount; // Return the number of valid image files found
+        }
+        else
+        {
+            Debug.LogError("Directory does not exist: " + folderPath);
+        }
+
+        Debug.Log("Number of Images found in the ImagesLow folder: " + imageCount);
     }
 
     public void PlaceImages()
     {
+        Debug.Log("Placing " + imageCount + " frames");
         for (int i = 0; i < imageCount; i++)
         {
             Vector3 randomPosition;
