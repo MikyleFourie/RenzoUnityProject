@@ -203,7 +203,7 @@ public class CSVReader : MonoBehaviour
 
                 displayText += "Cranio de Prozostrodon brasiliensis \n\n";
                 displayText += "Foto de Leonardo Kerber, do Programa de Pós-Graduação em Biodiversidade Animal da UFSM \n\n";
-                displayText += "Image provided by CAPPA - Centro de Apoio à Pesquisa Paleontológica da Quarta Colônia";
+                displayText += "Image provided by CAPPA - Centro de Apoio à Pesquisa Paleontológica da Quarta Colônia, Universidade Federal de Santa Maria";
             }
         }
 
@@ -215,7 +215,7 @@ public class CSVReader : MonoBehaviour
 
                 displayText += "Cerâmica Tupi-Guarani \n\n";
                 displayText += "vasilha cerâmica com tratamento de superfície corrugado  \n\n";
-                displayText += "Image provided by LASCA - Laboratório de Arqueologia, Sociedades e Culturas das Américas\n";
+                displayText += "Image provided by LASCA - Laboratório de Arqueologia, Sociedades e Culturas das Américas, Universidade Federal de Santa Maria\n";
                 displayText += "Found and/or Studied in São João do Polêsine & Santa Maria ";
             }
         }
@@ -226,7 +226,7 @@ public class CSVReader : MonoBehaviour
             // Check if imageName starts with "textile" (case-insensitive)
             if (imageName.ToLower().StartsWith("textil"))
             {
-                displayText = "Image of Textiles provided by LabInter from Brazil.";
+                displayText = "Image of Textiles provided by Universidade Federal de Santa Maria & LabInter from Brazil.";
             }
             else
             {
