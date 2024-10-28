@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class ImagePlacer : MonoBehaviour
 {
+    public Manager Manager;
     public GameObject imagePrefab;  // Prefab representing the image (or an empty GameObject with Image attached)
     public int imageCount = 723;   // Number of images to place (should be 2000)
     public Vector2 roomSize = new Vector2(30, 30);  // Room dimensions (Width x Length) (should be 100x100 for full room)
@@ -45,14 +46,17 @@ public class ImagePlacer : MonoBehaviour
         else
         {
             Debug.LogError("Directory does not exist: " + folderPath);
+            Manager.UpdateDebug("Directory does not exist: " + folderPath);
         }
 
         Debug.Log("Number of Images found in the ImagesLow folder: " + imageCount);
+        Manager.UpdateDebug("Number of Images found in the ImagesLow folder: " + imageCount);
     }
 
     public void PlaceImages()
     {
         Debug.Log("Placing " + imageCount + " frames");
+        Manager.UpdateDebug("Placing " + imageCount + " frames");
         for (int i = 0; i < imageCount; i++)
         {
             Vector3 randomPosition;

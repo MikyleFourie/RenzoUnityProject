@@ -6,8 +6,9 @@ using UnityEngine;
 
 public class Manager : MonoBehaviour
 {
-    public TextMeshProUGUI textMeshPro;  // Reference to the TextMeshPro component
-    public string csvFilePath; // Path to the CSV file
+    public TextMeshProUGUI descriptionText;  // Reference to the Description TextMeshPro component
+    public TextMeshProUGUI debugText;  // Reference to the TextMeshPro component
+    public string csvFileName; // Name of the CSV file. It MUST be in Streaming Assets
     public ImagePlacer ImagePlacer;
     public PhotoViewer PhotoViewer;
     public CSVReader CSVReader;
@@ -16,20 +17,39 @@ public class Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        UpdateDebug("Manager Start Ran");
         if (repitions < 1) repitions = 1;
+        UpdateDebug("Manager reset repitions to 1");
 
-        CSVReader.ParseCSV(csvFilePath);
+        UpdateDebug("Manager gets CSV Reader tries to read CSV");
+        CSVReader.ParseCSV(csvFileName);
+        UpdateDebug("Manager says CSV Reader Successfully Parsed");
+
+        UpdateDebug("Manager tries to get ImagePlacer to get Number of Images");
         ImagePlacer.GetNumberOfImageFilesInFolder(Path.Combine(Application.streamingAssetsPath, "Images", "ImagesLow"));
+        UpdateDebug("Manager says it got number of Images");
+
+        UpdateDebug("Manager got the image placer to place");
         for (int i = 0; i < repitions; i++)
         {
             ImagePlacer.PlaceImages();
         }
+        UpdateDebug("Manager says all images placed");
+
+        UpdateDebug("Manager tries to populate images");
         PhotoViewer.LoadImagesAfterStart(Path.Combine(Application.streamingAssetsPath, "Images", "ImagesLow"), repitions);
+        UpdateDebug("Manager successfully had all images placed");
     }
+
 
     // Updates the image description
     public void UpdateDescription(string imageName)
     {
-        textMeshPro.text = CSVReader.GetDescription(imageName);
+        descriptionText.text = CSVReader.GetDescription(imageName);
+    }
+
+    public void UpdateDebug(string debug)
+    {
+        debugText.text += "\n" + debug;
     }
 }

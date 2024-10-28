@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class CSVReader : MonoBehaviour
 {
-    public string csvFilePath; // Path to the CSV file
+    public Manager Manager;
+    //public string csvFilePath; // Path to the CSV file
     public List<ImageData> imageDataList = new List<ImageData>(); //List of each images data
     public List<string[]> parsedRows;
     //public CSVUpdaterTest csvUpdater;
@@ -39,15 +40,18 @@ public class CSVReader : MonoBehaviour
     }
 
     // Reading CSV manually. This is to deal with Multi-paragraph fields
-    public List<string[]> ParseCSV(string filePath)
+    public List<string[]> ParseCSV(string fileName)
     {
+        string csvFilePath = Path.Combine(Application.streamingAssetsPath, fileName);
+
+        Manager.UpdateDebug("ParseCSV Start");
         List<string[]> parsedRows = new List<string[]>();
         bool insideQuotedField = false;
         StringBuilder fieldBuilder = new StringBuilder();
         List<string> currentRow = new List<string>();
 
         // Read CSV line by line
-        using (StreamReader reader = new StreamReader(filePath))
+        using (StreamReader reader = new StreamReader(csvFilePath))
         {
             while (!reader.EndOfStream)
             {
@@ -111,6 +115,7 @@ public class CSVReader : MonoBehaviour
         //-------------------------------------------------------------
 
         Debug.Log("Number of images with information from CSV: " + parsedRows.Count);
+        Manager.UpdateDebug("Number of images with information from CSV: " + parsedRows.Count);
         saveParsedRows(parsedRows);
         return parsedRows;
     }
@@ -164,6 +169,7 @@ public class CSVReader : MonoBehaviour
 
         //csvUpdater.UpdateText(displayText);
         Debug.Log("Done Loading CSV");
+        Manager.UpdateDebug("Done loading CSV");
     }
 
     // Searches through the List of Images for the matching one

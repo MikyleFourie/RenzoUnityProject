@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 
 public class PhotoViewer : MonoBehaviour
 {
-
+    public Manager Manager;
     GameObject[] imageObjs; // Array of GameObjects to display images on
     Texture2D[] textures; // Array to store loaded textures
     List<string> validImages = new List<string>();
@@ -21,6 +21,7 @@ public class PhotoViewer : MonoBehaviour
         if (!Directory.Exists(folderPath))
         {
             Debug.LogError("Directory does not exist: " + folderPath);
+            Manager.UpdateDebug("Directory does not exist: " + folderPath);
             return;
         }
 
@@ -45,13 +46,17 @@ public class PhotoViewer : MonoBehaviour
     private IEnumerator LoadImages(string[] filePaths, int repitions)
     {
         Debug.Log("Begin Placing Images");
+        Manager.UpdateDebug("Begin Placing Images");
         // Get all Image GameObjects and their count
         imageObjs = GameObject.FindGameObjectsWithTag("Image");
         int totalImageObjects = imageObjs.Length;
         Debug.Log("imageObjects in scene total: " + totalImageObjects);
+        Manager.UpdateDebug("imageObjects in scene total: " + totalImageObjects);
         // Ensure we only consider the valid image file count
         int maxImagesToLoad = Mathf.Min(filePaths.Length, totalImageObjects);
         Debug.Log("maxImagestoLoad: " + maxImagesToLoad);
+        Manager.UpdateDebug("maxImagestoLoad: " + maxImagesToLoad);
+
 
 
         // Shuffle the filePaths array for randomness
@@ -65,6 +70,8 @@ public class PhotoViewer : MonoBehaviour
         }
 
         Debug.Log("shuffledPaths.Count: " + shuffledPaths.Count);
+        Manager.UpdateDebug("shuffledPaths.Count: " + shuffledPaths.Count);
+
 
         // Load the first batch of images into the first 723 image objects
         for (int i = 0; i < maxImagesToLoad; i++)
@@ -77,6 +84,8 @@ public class PhotoViewer : MonoBehaviour
                 if (uwr.result == UnityWebRequest.Result.ConnectionError || uwr.result == UnityWebRequest.Result.ProtocolError)
                 {
                     Debug.LogError("Error loading image: " + uwr.error);
+                    Manager.UpdateDebug("Error loading image: " + uwr.error);
+
                 }
                 else
                 {
@@ -111,11 +120,15 @@ public class PhotoViewer : MonoBehaviour
         }
 
         Debug.Log("Batch 1 Complete");
+        Manager.UpdateDebug("Batch 1 complete");
+
 
         int count = 2;
         while (count <= repitions)
         {
             Debug.Log("Batch " + count + " start");
+            Manager.UpdateDebug("Batch " + count + " start");
+
             // Identify image objects that still do not have textures
             List<GameObject> untexturedImages = new List<GameObject>();
 
@@ -127,6 +140,8 @@ public class PhotoViewer : MonoBehaviour
                 }
             }
             Debug.Log("untexturedimages.Count: " + untexturedImages.Count);
+            Manager.UpdateDebug("untexturedimages.Count: " + untexturedImages.Count);
+
             // Shuffle the paths again for randomness
             shuffledPaths.Clear();
             shuffledPaths = new List<string>(filePaths);
@@ -138,6 +153,8 @@ public class PhotoViewer : MonoBehaviour
                 shuffledPaths[randomIndex] = temp;
             }
             Debug.Log("shuffledPaths.Count: " + shuffledPaths.Count);
+            Manager.UpdateDebug("shuffledPaths.Count: " + shuffledPaths.Count);
+
 
             // Randomly assign the same low-res images to the untextured image objects
             for (int i = 0; i < untexturedImages.Count; i++)
@@ -151,6 +168,8 @@ public class PhotoViewer : MonoBehaviour
                     if (uwr.result == UnityWebRequest.Result.ConnectionError || uwr.result == UnityWebRequest.Result.ProtocolError)
                     {
                         Debug.LogError("Error loading image: " + uwr.error);
+                        Manager.UpdateDebug("Error loading image: " + uwr.error);
+
                     }
                     else
                     {
@@ -185,6 +204,8 @@ public class PhotoViewer : MonoBehaviour
             }
 
             Debug.Log("Batch" + count + " Complete");
+            Manager.UpdateDebug("Batch " + count + " Complete");
+
             count++;
         }
 
